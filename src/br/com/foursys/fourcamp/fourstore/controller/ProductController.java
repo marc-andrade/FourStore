@@ -5,25 +5,50 @@ import br.com.foursys.fourcamp.fourstore.service.ProductService;
 
 public class ProductController {
 	
-	public String cadastractProduct(String sku, Integer qtt, Double originalPrice, Double salePrice, String type, String size,
-			String color, String category, String departament, String description) {
-			
-		String respost = "Não foi possivel criar este produto no estoque";
-		Product product = new Product(sku, qtt, originalPrice, salePrice, type, size, color, category, departament, description);
+	ProductService prodService = new ProductService();
+	
+	public String cadastractProduct(String sku, Integer qtt, Double originalPrice, Double salePrice, String type,
+			String size, String color, String category, String departament, String description) {
+
+		Product product = new Product(sku, qtt, originalPrice, salePrice, type, size, color, category, departament,
+				description);
 		
-			ProductService productService = new ProductService();
-			if(productService.create(product)) {
-				respost = "Cadastro realizado com sucesso.";
-			}
-			
-		return respost;
+		return prodService.create(product);
+	}
+
+	public String read() {
+
+		return  prodService.read();
+	}
+
+	public String updateProduct(String SKU, Integer qtt) {
+		
+		Product product  = new Product(SKU, qtt);
+		
+		return prodService.update(product);
 	}
 	
-	public String read() {
-		String respost;
-		ProductService prodService = new ProductService();
-		respost = prodService.read();
+	public String delete(Integer opcao) {
+		String response = null;
 		
-		return respost;
+		if(opcao == 1) {
+			if(prodService.delete()) {
+				response = "Lista esvaziada";
+			}else {
+				response = "Erro: algo deu errado";
+			}
+			
+		}else if(opcao == 9) {
+			response = "Voltando ao menu...";
+		}else {
+			response = "Opção inválida voltando ao menu...";
+		}
+		return response;
+	}
+	
+	public String verifyProduct(Product product) {
+		
+		return prodService.verifyProduct(product);
+		
 	}
 }

@@ -4,43 +4,87 @@ import java.util.ArrayList;
 
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
-public class ProductData {
-	
-	private static ArrayList<Product> listProduct = new ArrayList<>();
+public class ProductData implements ProductDataInterface{
 
+	public static ArrayList<Product> listProduct = new ArrayList<>();
 	
-	public Boolean create(Product product) {
-		listProduct.add(product);
-		if(listProduct.isEmpty()) {
-			return false;
+	
+	public String create(Product product) {
+
+		if (checkProductExists(product)) {
+			return "Erro: Produto já existe no estoque.";
+
+		} else {
+
+			listProduct.add(product);
+
+			if (listProduct.isEmpty()) {
+				return "Erro: ao criar produto.";
+			}
+			return "Produto cadastrado.";
 		}
+
+	}
+
+	public String read() {
+
+		String response = "";
+		if (listProduct.isEmpty()) {
+			response = "Estoque Vazio.";
+		}
+
+		for (Product prod : listProduct) {
+			String aux = "Posição:" + (listProduct.indexOf(prod) + 1) + "\n" + prod.toString() + "\n\n";
+			response += aux;
+		}
+
+		return response;
+	}
+
+	public Boolean checkProductExists(Product product) {
+		boolean response = false;
+		for (Product prod : listProduct) {
+			if (product.getSku().equals(prod.getSku())) {
+				response = true;
+			}
+		}
+		return response;
+	}
+	
+	public Boolean checkQuantityOfProduct(Product product) {
+		
+		boolean response = false;
+		
+		for (Product prod : listProduct) {
+			if (product.getSku().equals(prod.getSku())) {
+				if(product.getQtt() <= prod.getQtt()) {
+					response = true;
+				}
+			}
+		}
+		return response;
+	}
+
+	public void update(Product product) {
+		
+		for (Product prod : listProduct) {
+			if (prod.getSku().equals(product.getSku())) {
+				prod.setQtt(prod.getQtt() + product.getQtt());
+			}
+		}
+	}
+
+	public Boolean delete() {
+		
+		listProduct.clear();
 		return true;
 	}
 
-	
-	public String read() {
-		String respost = "";
-		if(listProduct.isEmpty()) {
-			respost = "Estoque Vazio.";
-		}
-		for(Product prod : listProduct) {
-			 String aux = prod.toString() + "\n";
-			 respost += aux;
-		}
-		
-		return respost;
-	}
-
-	
-	public Boolean update(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	public Boolean delete(String respost) {
-		// TODO Auto-generated method stub
-		return null;
+	public void gambiarra() {
+		listProduct.add(new Product("SKUGAMBIARRA", 10, 22.0, 29.99, "TIPOGAMBIARRA", "COXINHA TERIA TIPOS DE TAMANHO ?",
+						"PQ EU PERGUNTARIA A COR DA COXINHA ?", "NHAME", "COMIDA BOA", "MUITO BOA"));
+		listProduct.add(new Product("PQ N UM ID CARA ?", 12, 7.0, 10.99, "CHOCOLATE", "TAMANHO PRA COMIDA ?",
+				"COR COCO", "GELADO", "SOBREMESSA", "NÃO SEI MAIS O Q DIZER"));
 	}
 
 }

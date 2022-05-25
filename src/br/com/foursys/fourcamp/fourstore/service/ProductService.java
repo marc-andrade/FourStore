@@ -4,34 +4,53 @@ import br.com.foursys.fourcamp.fourstore.data.ProductData;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class ProductService {
-	
+
 	ProductData prodData = new ProductData();
-	
-	public Boolean create(Product product) {
-		
-		if (prodData.create(product)) {
+
+	public String create(Product product) {
+
+		return prodData.create(product);
+	}
+
+	public String read() {
+
+		return prodData.read();
+	}
+
+	public String update(Product product) {
+		String response = "Erro: Produto não cadastrado";
+		if (prodData.checkProductExists(product)) {
+			prodData.update(product);
+			response = "Estoque atualizado.";
+		}
+		return response;
+	}
+
+	public Boolean delete() {
+
+		if (prodData.delete()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public String read() {
+	public String verifyProduct(Product product) {
 		
-		String respost;
-		respost = prodData.read();
+		String response = "";
 		
-		return respost;
-	}
-
-	public Boolean update(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Boolean delete(String respost) {
-		// TODO Auto-generated method stub
-		return null;
+		if(prodData.checkProductExists(product)) {
+			if (prodData.checkQuantityOfProduct(product)) {
+				response = "Produto possui estoque suficiente";
+			}else {
+				response = "Erro: Produto não possui estoque suficiente";
+			}
+		}else {
+			response = "Erro: Produto não cadastrado";
+		}
+		
+		return response;
+		
 	}
 
 }
