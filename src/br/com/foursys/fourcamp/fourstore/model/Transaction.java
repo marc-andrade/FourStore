@@ -1,31 +1,33 @@
 package br.com.foursys.fourcamp.fourstore.model;
 
+import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
+
 public class Transaction {
 	
 	private String cpf;
-	private String paymentMethod;
+	private PaymentMethod paymentMethod;
 	private Double valueOfSale;
 	
 	public Transaction() {
 		
 	}
 	
-	public Transaction(String cpf, String paymentMethod, Double valueOfSale) {
+	public Transaction(String cpf, PaymentMethod paymentMethod, Double valueOfSale) {
 		this.cpf = cpf;
 		this.paymentMethod = paymentMethod;
 		this.valueOfSale = valueOfSale;
 	}
 
-	public Transaction(String paymentMethod, Double valueOfSale) {
+	public Transaction(PaymentMethod paymentMethod, Double valueOfSale) {
 		this.paymentMethod = paymentMethod;
 		this.valueOfSale = valueOfSale;
 	}
 
-	public String getPaymentMethod() {
+	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
 
-	public void setPaymentMethod(String paymentMethod) {
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
 

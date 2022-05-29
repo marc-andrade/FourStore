@@ -28,17 +28,17 @@ public class ProductController {
 		return prodService.update(product);
 	}
 	
-	public String delete(Integer opcao) {
+	public String delete(Integer option) {
 		String response = null;
 		
-		if(opcao == 1) {
+		if(option == 1) {
 			if(prodService.delete()) {
 				response = "Lista esvaziada";
 			}else {
 				response = "Erro: algo deu errado";
 			}
 			
-		}else if(opcao == 9) {
+		}else if(option == 9) {
 			response = "Voltando ao menu...";
 		}else {
 			response = "Opção inválida voltando ao menu...";

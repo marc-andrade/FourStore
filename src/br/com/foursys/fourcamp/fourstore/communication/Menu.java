@@ -11,15 +11,14 @@ public class Menu {
 	public void callMenuMethods() {
 
 		Scanner sc = new Scanner(System.in);
-		int opcao = -1;
+		int option = -1;
 
-		while (opcao != 0) {
+		while (option != 0) {
 
 			interfaceMenu();
-			opcao = sc.nextInt();
-			sc.nextLine();
+			option = sc.nextInt();
 
-			switch (opcao) {
+			switch (option) {
 			case 0:
 				System.out.println("Saindo do sistema...");
 				break;
@@ -105,8 +104,10 @@ public class Menu {
 	public void showStock() {
 
 		ProductController productC = new ProductController();
-
-		System.out.println("\nExibindo Estoque: \n");
+		
+		System.out.println("\n========================");
+		System.out.println("     Exibindo Estoque ");
+		System.out.println("======================== \n");
 		System.out.println(productC.read());
 	}
 
@@ -126,7 +127,7 @@ public class Menu {
 
 	public void truncateStock(Scanner sc) {
 
-		System.out.println("\nTem certeza que deseja esvaziar o stock ?");
+		System.out.println("\nTem certeza que deseja esvaziar o estoque ?");
 		System.out.println("1 - Sim.");
 		System.out.println("9 - Não");
 		System.out.print("Digite aqui: ");
@@ -140,36 +141,30 @@ public class Menu {
 	
 	public void sellProduct(Scanner sc) {
 		
-		System.out.println("\nVenda de Produtos\n");
+		int option;
+		
+		System.out.println("\n==============================");
+		System.out.println("     Venda de Produtos");
+		System.out.println("==============================");
+		
+		do {
+		sc.nextLine();
 		System.out.print("Informe o ID do produto:");
 		String sku = sc.nextLine();
 		System.out.print("Infome a quantidade: ");
 		Integer qtt = sc.nextInt();
 		
 		TransactionController transactionC = new TransactionController();
-		transactionC.productVerify(sku, qtt);
+		System.out.println(transactionC.productVerify(sku, qtt));
+		System.out.println();
+		System.out.println(transactionC.showShoppingCart());
+		System.out.println("Deseja continuar comprando ?");
+		System.out.println("1 - Sim.");
+		System.out.println("(*) - Outra tecla para finalizar");
+		System.out.print("Digite aqui: ");
+		option = sc.nextInt();
 		
-		/*Product product = new Product(sku, qtt);
-		ProductData productD = new ProductData();
+		}while(option == 1);
 		
-		String meAjuda = null;
-		double custo = 0;
-		
-		if(productD.checkProductExists(product)) {
-			for(Product prod : productD.listProduct) {
-				
-					if(product.getQtt() < prod.getQtt()) {
-						custo = product.getQtt() * prod.getSalePrice();
-						prod.setQtt(prod.getQtt() - product.getQtt());
-						meAjuda = "Pedido realizado";
-					}else {
-						meAjuda = "Pedido maior que quantidade em estoque";
-					}
-				}
-			}else {
-				meAjuda = "Produto não cadastrado";
-		}*/
-		
-		//System.out.println(meAjuda + " Preço: " + custo);
 	}
 }

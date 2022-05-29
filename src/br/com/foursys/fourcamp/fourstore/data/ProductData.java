@@ -25,7 +25,7 @@ public class ProductData implements ProductDataInterface{
 		}
 
 	}
-
+	
 	public String read() {
 
 		String response = "";
@@ -58,6 +58,8 @@ public class ProductData implements ProductDataInterface{
 		for (Product prod : listProduct) {
 			if (product.getSku().equals(prod.getSku())) {
 				if(product.getQtt() <= prod.getQtt()) {
+					product.setSalePrice(prod.getSalePrice());
+					
 					response = true;
 				}
 			}
