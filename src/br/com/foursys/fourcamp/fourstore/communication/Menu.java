@@ -5,6 +5,7 @@ import java.util.Scanner;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.TransactionController;
 import br.com.foursys.fourcamp.fourstore.data.ProductData;
+import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 
 public class Menu {
 
@@ -166,5 +167,25 @@ public class Menu {
 		
 		}while(option == 1);
 		
+		do {
+		System.out.println("\nSelecione a forma de pagamento");
+		System.out.println("1 - Cartão de débito");
+		System.out.println("2 - Cartão de crédito");
+		System.out.println("3 - Dinheiro");
+		System.out.println("4 - PIX");
+		option = sc.nextInt();
+		
+		System.out.println(PaymentMethod.selectOptionMenu(option));
+		}while(PaymentMethod.selectOptionMenu(option).equals("Metôdo de pagamento inválido"));
+		
+		PaymentMethod payMethod = PaymentMethod.optionPayment(option);
+		
+		System.out.println("Deseja informar CPF ?");
+		System.out.println("1 - Sim.");
+		System.out.println("(*) - Para não.");
+		System.out.print("Digite aqui: ");
+		option = sc.nextInt();
+		
 	}
+
 }

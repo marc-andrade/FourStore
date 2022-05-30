@@ -59,6 +59,7 @@ public class ProductData implements ProductDataInterface{
 			if (product.getSku().equals(prod.getSku())) {
 				if(product.getQtt() <= prod.getQtt()) {
 					product.setSalePrice(prod.getSalePrice());
+					prod.setQtt(prod.getQtt() - product.getQtt());
 					
 					response = true;
 				}

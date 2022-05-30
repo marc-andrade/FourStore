@@ -7,6 +7,7 @@ public class Transaction {
 	private String cpf;
 	private PaymentMethod paymentMethod;
 	private Double valueOfSale;
+	private String keyPix;
 	
 	public Transaction() {
 		
@@ -35,7 +36,6 @@ public class Transaction {
 		return cpf;
 	}
 
-	
 	public Double getValueOfSale() {
 		return valueOfSale;
 	}
