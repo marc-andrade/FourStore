@@ -2,16 +2,28 @@ package br.com.foursys.fourcamp.fourstore.enums;
 
 public enum PaymentMethod {
 
-	DEBIT(1), CREDIT(2), MONEY(3), PIX(4);
+	DEBIT(1,"Débito"), CREDIT(2,"Crédito"), MONEY(3,"Dinheiro"), PIX(4,"PIX");
 
 	private final int value;
-
+	private final String descripiton;
+	
 	PaymentMethod(int value) {
 		this.value = value;
+		this.descripiton = "";
+		
+	}
+
+	PaymentMethod(int value, String descripiton) {
+		this.value = value;
+		this.descripiton = descripiton;
 	}
 
 	public int getValue() {
 		return value;
+	}
+	
+	public String getDescripiton() {
+		return descripiton;
 	}
 
 	public static String selectOptionMenu(int value) {
@@ -48,4 +60,6 @@ public enum PaymentMethod {
 		return response;
 
 	}
+
+	
 }

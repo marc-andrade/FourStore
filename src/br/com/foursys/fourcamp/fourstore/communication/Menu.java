@@ -44,6 +44,7 @@ public class Menu {
 				comandoSecreto.gambiarra();
 				break;
 			default:
+				System.out.println("Comando Inválido");
 				break;
 			}
 
@@ -142,6 +143,7 @@ public class Menu {
 	
 	public void sellProduct(Scanner sc) {
 		
+		TransactionController transactionC = new TransactionController();
 		int option;
 		
 		System.out.println("\n==============================");
@@ -155,7 +157,6 @@ public class Menu {
 		System.out.print("Infome a quantidade: ");
 		Integer qtt = sc.nextInt();
 		
-		TransactionController transactionC = new TransactionController();
 		System.out.println(transactionC.productVerify(sku, qtt));
 		System.out.println();
 		System.out.println(transactionC.showShoppingCart());
@@ -165,6 +166,7 @@ public class Menu {
 		System.out.print("Digite aqui: ");
 		option = sc.nextInt();
 		
+		System.out.println();
 		}while(option == 1);
 		
 		do {
@@ -173,18 +175,58 @@ public class Menu {
 		System.out.println("2 - Cartão de crédito");
 		System.out.println("3 - Dinheiro");
 		System.out.println("4 - PIX");
+		System.out.print("Digite aqui: ");
 		option = sc.nextInt();
 		
-		System.out.println(PaymentMethod.selectOptionMenu(option));
+		System.out.println("\nForma de pagamento escolhida: "+PaymentMethod.selectOptionMenu(option)+"!\n");
 		}while(PaymentMethod.selectOptionMenu(option).equals("Metôdo de pagamento inválido"));
 		
 		PaymentMethod payMethod = PaymentMethod.optionPayment(option);
 		
 		System.out.println("Deseja informar CPF ?");
 		System.out.println("1 - Sim.");
-		System.out.println("(*) - Para não.");
+		System.out.println("(*) - Outra tecla para finalizar.");
 		System.out.print("Digite aqui: ");
 		option = sc.nextInt();
+		
+		if(option == 1) {
+			System.out.print("Informe o CPF: ");
+			sc.nextLine();
+			String cpf = sc.nextLine();
+			
+			if(payMethod == PaymentMethod.PIX) {
+				System.out.print("Informe a chave PIX: ");
+				String pix = sc.nextLine();
+				System.out.println(transactionC.cadTransaction(cpf, payMethod, pix)); 
+				
+			}else if(payMethod == PaymentMethod.DEBIT || payMethod == PaymentMethod.CREDIT) {
+				
+				System.out.print("Informe o número do cartão: ");
+				int cardNumber = sc.nextInt();
+				System.out.println(transactionC.cadTransaction(payMethod,cardNumber));
+				
+			}else {
+				System.out.println(transactionC.cadTransaction(cpf, payMethod));
+			}
+	
+		} else {
+			if(payMethod == PaymentMethod.PIX) {
+				System.out.print("Informe a chave PIX: ");
+				String pix = sc.nextLine();
+				System.out.println(transactionC.cadTransaction(payMethod, pix));
+				
+			}else if(payMethod == PaymentMethod.DEBIT || payMethod == PaymentMethod.CREDIT) {
+				System.out.print("Informe o número do cartão: ");
+				int cardNumber = sc.nextInt();
+				System.out.println(transactionC.cadTransaction(payMethod,cardNumber));
+				
+			}else {
+			System.out.println(transactionC.cadTransaction(payMethod));
+			}
+		}
+		
+		System.out.println("\nObrigado por comprar na Fourstore !!!\n\n");
+		
 		
 	}
 
