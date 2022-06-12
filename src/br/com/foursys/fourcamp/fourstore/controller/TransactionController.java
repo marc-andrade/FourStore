@@ -20,6 +20,10 @@ public class TransactionController {
 	public String showShoppingCart() {
 		return transactionS.showShoppingCart();
 	}
+	
+	public String showSaleHistory() {
+		return transactionS.showSaleHistory();
+	}
 
 	public String cadTransaction(String cpf, PaymentMethod paymentMethod) {
 

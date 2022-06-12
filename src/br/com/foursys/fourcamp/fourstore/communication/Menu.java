@@ -38,6 +38,9 @@ public class Menu {
 			case 5:
 				sellProduct(sc);
 				break;
+			case 6:
+				showSellHistory();
+				break;
 			case 9:
 				System.out.println("\ncomando secreto!!! \n");
 				ProductData comandoSecreto = new ProductData();
@@ -60,6 +63,7 @@ public class Menu {
 		System.out.println("3 - Atualizar Estoque");
 		System.out.println("4 - Esvaziar estoque");
 		System.out.println("5 - Venda de produtos");
+		System.out.println("6 - Historico de Vendas");
 		System.out.println("0 - Sair do Sistema.");
 		System.out.print("Informe a opção: ");
 	}
@@ -196,6 +200,7 @@ public class Menu {
 			
 			if(payMethod == PaymentMethod.PIX) {
 				System.out.print("Informe a chave PIX: ");
+				sc.nextLine();
 				String pix = sc.nextLine();
 				System.out.println(transactionC.cadTransaction(cpf, payMethod, pix)); 
 				
@@ -203,7 +208,7 @@ public class Menu {
 				
 				System.out.print("Informe o número do cartão: ");
 				int cardNumber = sc.nextInt();
-				System.out.println(transactionC.cadTransaction(payMethod,cardNumber));
+				System.out.println(transactionC.cadTransaction(cpf,payMethod,cardNumber));
 				
 			}else {
 				System.out.println(transactionC.cadTransaction(cpf, payMethod));
@@ -212,6 +217,7 @@ public class Menu {
 		} else {
 			if(payMethod == PaymentMethod.PIX) {
 				System.out.print("Informe a chave PIX: ");
+				sc.nextLine();
 				String pix = sc.nextLine();
 				System.out.println(transactionC.cadTransaction(payMethod, pix));
 				
@@ -225,9 +231,19 @@ public class Menu {
 			}
 		}
 		
-		System.out.println("\nObrigado por comprar na Fourstore !!!\n\n");
+		System.out.println("\nObrigado por comprar na Fourstore !!!\n");
+		System.out.println("teste");
 		
+	}
+	
+	public void showSellHistory() {
 		
+		TransactionController transactionC = new TransactionController();
+		
+		System.out.println("\n=======================================");
+		System.out.println("     Exibindo Historico de Vendas ");
+		System.out.println("=======================================");
+		System.out.println(transactionC.showSaleHistory());
 	}
 
 }

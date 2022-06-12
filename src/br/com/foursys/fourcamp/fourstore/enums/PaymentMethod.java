@@ -7,12 +7,6 @@ public enum PaymentMethod {
 	private final int value;
 	private final String descripiton;
 	
-	PaymentMethod(int value) {
-		this.value = value;
-		this.descripiton = "";
-		
-	}
-
 	PaymentMethod(int value, String descripiton) {
 		this.value = value;
 		this.descripiton = descripiton;
